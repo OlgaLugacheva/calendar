@@ -150,7 +150,7 @@ public class MyCalendar {
     }
 
     private static List<Repeatable> findTasksByDate(LocalDate date) {
-        List<Repeatable> tasks = new ArrayList<>(); //todo: sort
+        List<Repeatable> tasks = new ArrayList<>();
         for (Repeatable task : actualTasks.values()) {
             if (task.checkOccurance(date.atStartOfDay())) {
                 tasks.add(task);
