@@ -8,5 +8,7 @@ public interface Repeatable {
 
     void setTitle(String title);
 
-     LocalDateTime getFirstDate();
+    LocalDateTime getFirstDate();
+
+    void setArchived(boolean archived);
 }

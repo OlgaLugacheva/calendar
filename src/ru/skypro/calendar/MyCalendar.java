@@ -12,7 +12,7 @@ import java.util.*;
 public class MyCalendar {
 
     private static final Map<Integer, Repeatable> actualTasks = new HashMap<>();
-    private static final Map<Integer, Task> archivedTasks = new HashMap<>();
+    private static final Map<Integer, Repeatable> archivedTasks = new HashMap<>();
 
     public static void addTask(Scanner scanner) {
 
@@ -97,7 +97,7 @@ public class MyCalendar {
         System.out.println("Для удаления введите Id задачи\n");
         int id = scanner.nextInt();
         if (actualTasks.containsKey(id)) {
-            Task removedTask = (Task) actualTasks.get(id);
+            Repeatable removedTask = actualTasks.get(id);
             removedTask.setArchived(true);
             archivedTasks.put(id, removedTask);
             System.out.println("Задача " + id + " удалена\n");
@@ -127,7 +127,7 @@ public class MyCalendar {
     }
 
     public static void printArchivedTasks() {
-        for (Task task : archivedTasks.values()) {
+        for (Repeatable task : archivedTasks.values()) {
             System.out.println(task);
         }
     }
