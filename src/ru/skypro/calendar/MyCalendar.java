@@ -69,7 +69,8 @@ public class MyCalendar {
                     scanner.nextLine();
                     System.out.println("Введите название задачи: ");
                     String title = scanner.nextLine();
-                    Repeatable task = actualTasks.get(id);
+                    Task task = (Task)actualTasks.get(id);
+
                     task.setTitle(title);
                 }
                 case 1 -> {
@@ -139,7 +140,8 @@ public class MyCalendar {
             Repeatable task =  entry.getValue();
             LocalDate localDate = task.getFirstDate().toLocalDate();
             if (taskMap.containsKey(localDate)) {
-                taskMap.get(localDate).add(task);
+                ArrayList<Repeatable> tasks = taskMap.get(localDate);
+                tasks.add(task);
             } else {
                 taskMap.put(localDate, new ArrayList<>(Collections.singletonList(task)));
             }

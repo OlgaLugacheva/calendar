@@ -2,7 +2,6 @@ package ru.skypro.util;
 
 import ru.skypro.calendar.exceptions.WrongInputException;
 
-import java.util.InputMismatchException;
 
 public class ValidateUtils {
 
