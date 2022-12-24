@@ -69,14 +69,14 @@ public class MyCalendar {
                     scanner.nextLine();
                     System.out.println("Введите название задачи: ");
                     String title = scanner.nextLine();
-                    Task task = (Task) actualTasks.get(id);
+                    Repeatable task = actualTasks.get(id);
                     task.setTitle(title);
                 }
                 case 1 -> {
                     scanner.nextLine();
                     System.out.println("Введите описание задачи: ");
                     String description = scanner.nextLine();
-                    Task task = (Task) actualTasks.get(id);
+                    Repeatable task = actualTasks.get(id);
                     task.setTitle(description);
                 }
                 case 2 -> {
@@ -133,10 +133,10 @@ public class MyCalendar {
     }
 
     public static void getGroupedByDate() {
-        Map<LocalDate, ArrayList<Task>> taskMap = new HashMap<>();
+        Map<LocalDate, ArrayList<Repeatable>> taskMap = new HashMap<>();
 
         for (Map.Entry<Integer, Repeatable> entry : actualTasks.entrySet()) {
-            Task task = (Task) entry.getValue();
+            Repeatable task =  entry.getValue();
             LocalDate localDate = task.getFirstDate().toLocalDate();
             if (taskMap.containsKey(localDate)) {
                 taskMap.get(localDate).add(task);
@@ -144,7 +144,7 @@ public class MyCalendar {
                 taskMap.put(localDate, new ArrayList<>(Collections.singletonList(task)));
             }
         }
-        for (Map.Entry<LocalDate, ArrayList<Task>> taskEntry : taskMap.entrySet()) {
+        for (Map.Entry<LocalDate, ArrayList<Repeatable>> taskEntry : taskMap.entrySet()) {
             System.out.println(taskEntry.getKey() + " : " + taskEntry.getValue());
         }
     }
