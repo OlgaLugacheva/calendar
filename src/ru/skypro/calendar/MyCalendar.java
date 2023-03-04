@@ -1,5 +1,6 @@
 package ru.skypro.calendar;
 
+import ru.skypro.calendar.exceptions.TaskNotFoundException;
 import ru.skypro.calendar.exceptions.WrongInputException;
 import ru.skypro.calendar.model.*;
 import ru.skypro.util.ValidateUtils;
@@ -61,7 +62,7 @@ public class MyCalendar {
             printActualTasks();
             int id = scanner.nextInt();
             if (!actualTasks.containsKey(id)) {
-                throw new WrongInputException("Задачи не найдена");
+                throw new TaskNotFoundException("Задачи не найдена");
             }
             System.out.println("Редактирование 0-заголовок 1-описание 2-тип 3-дата");
             int menuCase = scanner.nextInt();
@@ -70,7 +71,7 @@ public class MyCalendar {
                     scanner.nextLine();
                     System.out.println("Введите название задачи: ");
                     String title = scanner.nextLine();
-                    Task task = (Task)actualTasks.get(id);
+                    Task task = (Task) actualTasks.get(id);
 
                     task.setTitle(title);
                 }
@@ -88,7 +89,7 @@ public class MyCalendar {
 //todo
                 }
             }
-        } catch (WrongInputException e) {
+        } catch (TaskNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -96,14 +97,19 @@ public class MyCalendar {
     public static void deleteTask(Scanner scanner) {
         System.out.println("Текущие задачи\n");
         printActualTasks();
-        System.out.println("Для удаления введите Id задачи\n");
-        int id = scanner.nextInt();
-        if (actualTasks.containsKey(id)) {
-            Repeatable removedTask = actualTasks.get(id);
-            removedTask.setArchived(true);
-            archivedTasks.put(id, removedTask);
-            System.out.println("Задача " + id + " удалена\n");
-        } else {
+        try {
+            System.out.println("Для удаления введите Id задачи\n");
+            int id = scanner.nextInt();
+            if (actualTasks.containsKey(id)) {
+                Repeatable removedTask = actualTasks.get(id);
+                removedTask.setArchived(true);
+                archivedTasks.put(id, removedTask);
+                System.out.println("Задача " + id + " удалена\n");
+            } else {
+                throw new TaskNotFoundException();
+            }
+        } catch (TaskNotFoundException e) {
+            e.printStackTrace();
             System.out.println("Такой задачи не существует\n");
         }
 
@@ -138,7 +144,7 @@ public class MyCalendar {
         Map<LocalDate, ArrayList<Repeatable>> taskMap = new HashMap<>();
 
         for (Map.Entry<Integer, Repeatable> entry : actualTasks.entrySet()) {
-            Repeatable task =  entry.getValue();
+            Repeatable task = entry.getValue();
             LocalDate localDate = task.getFirstDate().toLocalDate();
             if (taskMap.containsKey(localDate)) {
                 ArrayList<Repeatable> tasks = taskMap.get(localDate);
