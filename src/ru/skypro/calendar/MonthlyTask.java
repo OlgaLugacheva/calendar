@@ -11,6 +11,6 @@ public class MonthlyTask extends Task implements Repeatable {
 
     @Override
     public boolean checkOccurance(LocalDateTime requestedDate) {
-        return getFirstDate().getMonth().equals(requestedDate.getMonth());
+        return getFirstDate().getDayOfMonth() == (requestedDate.getDayOfMonth());
     }
 }
