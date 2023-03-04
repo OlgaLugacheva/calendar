@@ -1,6 +1,7 @@
-package ru.skypro.calendar;
+package ru.skypro.calendar.model;
 
 
+import ru.skypro.calendar.TaskType;
 import ru.skypro.calendar.exceptions.WrongInputException;
 import ru.skypro.util.ValidateUtils;
 

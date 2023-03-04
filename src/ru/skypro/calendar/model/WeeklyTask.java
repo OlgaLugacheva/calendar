@@ -1,10 +1,10 @@
-package ru.skypro.calendar;
+package ru.skypro.calendar.model;
 
+import ru.skypro.calendar.Repeatable;
+import ru.skypro.calendar.TaskType;
 import ru.skypro.calendar.exceptions.WrongInputException;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class WeeklyTask extends Task implements Repeatable {
     public WeeklyTask(String title, String description, TaskType taskType, LocalDateTime date) throws WrongInputException {
